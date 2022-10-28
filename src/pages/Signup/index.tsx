@@ -8,7 +8,8 @@ import logoImg from '../../assets/iservicesLogo.png';
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 
-import { Container, Content, Background } from './styles';
+import { Container, Content } from './styles';
+import Header from "../../components/Header/Header";
 
 const SignUp: React.FC = () => {
     const handleSubmit = useCallback(async (data: object) => {
@@ -29,11 +30,10 @@ const SignUp: React.FC = () => {
     }, []);
 
     return (
+        <>
+        <Header/>
         <Container>
-            <Background/>
             <Content>
-
-                <img src={logoImg} alt="iservices" />
 
                 <Form onSubmit={handleSubmit}>
                     <h1>Faça seu Cadastro</h1>
@@ -57,6 +57,7 @@ const SignUp: React.FC = () => {
 
             </Content>
         </Container>
+        </>
     );
 };
 export default SignUp;

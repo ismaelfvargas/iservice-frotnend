@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
 
-import signUpBackground from '../../assets/background-register.jpg'
+// import logoImg from '../../assets/iservicesLogo.png';
 
 export const Container = styled.div`
-  height: 100vh;
-  
+  margin-top: 40px;
   display: flex;
   align-items: stretch;
+  justify-content: center;
 `;
 
 export const Content = styled.div`
@@ -46,7 +46,7 @@ export const Content = styled.div`
   }  
   
   > a {
-    color: #f4ede8;
+    color: #1c1e2a;
     display: block;
     margin-top: 24px;
     text-decoration: none;
@@ -65,8 +65,8 @@ export const Content = styled.div`
 
 `;
 
-export const Background = styled.div`
-  flex: 1;
-  background: url(${signUpBackground}) no-repeat center;
-  background-size: cover;
-`;
+// export const Background = styled.div`
+//   flex: 1;
+//   background: url(${signUpBackground}) no-repeat center;
+//   background-size: cover;
+// `;

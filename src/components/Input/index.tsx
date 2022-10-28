@@ -9,13 +9,18 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     icon?: React.ComponentType<IconBaseProps>;
 }
 
+interface InputValueReference {
+    value: string;
+}
+
 const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest}) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const [isFocused, setIsFocused] = useState(false);
     const [isFilled, setIsFilled] = useState(false);
 
-    const { fieldName, defaultValue, error, registerField } = useField(name);
+    const {fieldName, defaultValue = '', error, registerField} = useField(name);
+    const inputValueRef = useRef<InputValueReference>({ value: defaultValue });
 
     const handleInputFocus = useCallback(() => {
         setIsFocused(true);
@@ -24,11 +29,7 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest}) => {
     const handleInputBlur = useCallback(() => {
         setIsFocused(false);
 
-        if (inputRef.current?.value) {
-            setIsFilled(true);
-        } else {
-            setIsFilled(false);
-        }
+        setIsFilled(!!inputRef.current?.value);
     }, []);
 
     useEffect(() => {
@@ -45,9 +46,11 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest}) => {
             <input
                 onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
-                defaultValue={defaultValue}
                 ref={inputRef}
-                {...rest} />
+                {...rest}
+            />
+
+            {error}
         </Container>
     );
 };
