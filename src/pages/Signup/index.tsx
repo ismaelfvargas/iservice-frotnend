@@ -1,17 +1,21 @@
-import React, { useCallback } from 'react';
+import React, {useCallback, useRef} from 'react';
 import { FiMail, FiLock, FiUser, FiArrowLeft } from 'react-icons/fi';
 import { Form } from "@unform/web";
+import { FormHandles } from "@unform/core";
 import * as Yup from 'yup';
 
-import logoImg from '../../assets/iservicesLogo.png';
+
 
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-
-import { Container, Content } from './styles';
 import Header from "../../components/Header/Header";
 
+import { Container, Content } from './styles';
+
 const SignUp: React.FC = () => {
+
+    const formRef = useRef<FormHandles>(null);
+
     const handleSubmit = useCallback(async (data: object) => {
         try {
             const schema = Yup.object().shape({
@@ -24,8 +28,13 @@ const SignUp: React.FC = () => {
                 // abortEarly - retorna todos os erros das validações, em vez de retornar apenas o primeiro erro
                 abortEarly: false,
             })
+
         } catch (err) {
             console.log(err)
+            formRef.current?.setErrors({
+                name: 'Nome obrigatório',
+            })
+            console.log(formRef.current?.getData())
         }
     }, []);
 
